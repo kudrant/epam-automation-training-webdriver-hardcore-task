@@ -6,7 +6,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
 
 public abstract class BasePage {
     WebDriver driver;
@@ -15,12 +14,11 @@ public abstract class BasePage {
         PageFactory.initElements(driver, this);
         this.driver = driver;
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
     }
 
     protected WebElement waitVisibilityOf(WebElement element) {
-        return new WebDriverWait(driver, 5)
+        return new WebDriverWait(driver, 300)
                 .until(ExpectedConditions.visibilityOf(element));
     }
 

@@ -6,11 +6,9 @@ import org.openqa.selenium.support.FindBy;
 
 public class PricingCalculatorPage extends BasePage{
 
-    PricingCalculatorPage(WebDriver driver) {
-        super(driver);
-    }
+    public PricingCalculatorPage(WebDriver driver) { super(driver); }
 
-    @FindBy(xpath = "//div[@title='Compute Engine']/..//div[@class='hexagon-in2']")
+    @FindBy(xpath = "//div[@class='tab-holder compute']//div[@class='name ng-binding']")
     private WebElement computeEngine;
 
     @FindBy(xpath = "//label[contains(text(), 'Number of instances')]/../input[@name='quantity']")
@@ -82,6 +80,11 @@ public class PricingCalculatorPage extends BasePage{
     @FindBy(xpath = "//button[@aria-label='Email Estimate']")
     private WebElement emailEstimateBtn;
 
+    @FindBy(xpath = "//input[@ng-model='emailQuote.user.email']")
+    private WebElement mailAddressField;
+
+    @FindBy(xpath = "//button[@aria-label='Send Email']")
+    private WebElement sendEmailBtn;
 
 
     public PricingCalculatorPage goToCalculatorFrame() {
@@ -90,7 +93,7 @@ public class PricingCalculatorPage extends BasePage{
     }
 
     public PricingCalculatorPage activateComputeEngine() {
-        computeEngine.click();
+        waitVisibilityOf(computeEngine).click();
         return this;
     }
 
@@ -169,6 +172,22 @@ public class PricingCalculatorPage extends BasePage{
                 .replaceAll(",", "")
                 .split(" ")[0]);
     }
+
+    public PricingCalculatorPage clickEmailEstimateButton() {
+        waitVisibilityOf(emailEstimateBtn).click();
+        return this;
+    }
+
+    public PricingCalculatorPage fillEmailField(String mailAddress) {
+        waitVisibilityOf(mailAddressField).sendKeys(mailAddress);
+        return this;
+    }
+
+    public PricingCalculatorPage clickSendEmailButton() {
+        waitVisibilityOf(sendEmailBtn).click();
+        return this;
+    }
+
 
 
 
