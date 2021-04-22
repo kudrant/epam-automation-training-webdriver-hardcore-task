@@ -5,14 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class GoogleCloudPage {
+public class GoogleCloudPage extends BasePage {
     private static final String PAGE_URL = "https://cloud.google.com";
     WebDriver driver;
 
     public GoogleCloudPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+        super(driver);
         this.driver = driver;
     }
 

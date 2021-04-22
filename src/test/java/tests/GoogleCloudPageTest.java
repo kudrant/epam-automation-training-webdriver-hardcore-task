@@ -8,8 +8,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.GoogleCloudPage;
 
-import java.util.concurrent.TimeUnit;
-
 public class GoogleCloudPageTest {
 
     private WebDriver driver;
@@ -18,25 +16,50 @@ public class GoogleCloudPageTest {
     public void browserSetup() {
         System.setProperty("webdriver.chrome.driver","src/main/resources/chromedriver.exe");
         driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @Test
-    public void commonSearchTermResultsNotEmpty() {
+    public void checkTotalEstimatedMonthlyCost() {
 
-        //double totalEstimatedMonthlyCost =
+        double totalEstimatedMonthlyCost =
                 new GoogleCloudPage(driver)
                 .openPage()
                 .clickSearchBtn()
-                .searchForPricingCalculator("Google Cloud Platform Pricing Calculator");
-        System.out.println("sdfsdfsdf");
-        //Assert.assertTrue(expectedSearchResultsNumber > 0, "Search results are empty!");
+                .searchForPricingCalculator("Google Cloud Platform Pricing Calculator")
+                .goTOPricingCalculator()
+                .goToCalculatorFrame()
+                .activateComputeEngine()
+                //filling out the form
+                .selectNumberOfInstances()
+                .selectOS()
+                .selectMachineClass()
+                .selectMachineSeries()
+                .selectMachineType()
+                .selectAddGPUsCheckbox()
+                .selectNumberOfGPUs()
+                .selectGPUType()
+                .selectLocalSSD()
+                .selectDatacenterLocation()
+                .selectCommittedUsage()
+                .clickAddToEstimateButton()
+                .getTotalEstimatedMonthlyCost();
+
+
+//        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+//        driver.switchTo().window(tabs.get(1));
+//        driver.get("http://google.com");
+//
+//                System.out.println("Just text");
+
+
+        Assert.assertEquals(totalEstimatedMonthlyCost, 1082.77, "Search results are empty!");
 
     }
 
-    @AfterMethod(alwaysRun = true)
 
+
+
+    @AfterMethod(alwaysRun = true)
     public void BrowserClose() {
         driver.quit();
         driver = null;
