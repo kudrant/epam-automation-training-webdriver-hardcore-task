@@ -1,4 +1,4 @@
-package tests;
+package test;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -7,9 +7,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.GoogleCloudPage;
-import pages.PricingCalculatorPage;
-import pages.TenMinutEmailPage;
+import page.GoogleCloudPage;
+import page.PricingCalculatorPage;
+import page.TenMinutEmailPage;
 
 import java.util.ArrayList;
 
