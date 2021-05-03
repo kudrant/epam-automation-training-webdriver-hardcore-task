@@ -33,18 +33,7 @@ public class TenMinutEmailPage extends BasePage{
     private WebElement totalEstimatedCostFromEmail;
 
     public String copyMailAddress() {
-
-        waitVisibilityOf(copyMailAddressBtn).click();
-
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Clipboard clipboard = toolkit.getSystemClipboard();
-        String mailAddress = null;
-        try {
-            mailAddress = (String) clipboard.getData(DataFlavor.stringFlavor);
-        } catch (UnsupportedFlavorException | IOException e) {
-            e.printStackTrace();
-        }
-        return mailAddress;
+        return waitVisibilityOf(mailAddress).getAttribute("value");
     }
 
     public TenMinutEmailPage openMail() {
